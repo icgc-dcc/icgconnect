@@ -1,0 +1,7 @@
+setup.py
+icgconnect/__init__.py
+icgconnect.egg-info/PKG-INFO
+icgconnect.egg-info/SOURCES.txt
+icgconnect.egg-info/dependency_links.txt
+icgconnect.egg-info/not-zip-safe
+icgconnect.egg-info/top_level.txt

@@ -1,14 +1,16 @@
 
 import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import re
 import json
-import EgaError
 import subprocess
 import hashlib
 import os
 
 api_access_url = "https://ega.ebi.ac.uk/ega/rest/access/v2"
 api_download_url = "http://ega.ebi.ac.uk/ega/rest/ds/v2"
+
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 def login(email, password):
 	""" Login to the ega api
@@ -27,6 +29,8 @@ def login(email, password):
 	# Email must be a valid email
 	if not re.match("[^@]+@[^@]+\.[^@]+", email):
 		raise ValueError(email+" is not a valid email")
+
+	print _api_access_endpoint("/users/"+email+"?pass="+password, None)
 
 	return result_from_response(requests.get(_api_access_endpoint("/users/"+email+"?pass="+password, None), verify=False))[1]
 
