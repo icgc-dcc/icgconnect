@@ -5,7 +5,7 @@ import subprocess
 import os
 import csv
 import hashlib
-import ..utils
+from icgconnect.utils import file_utils
 
 COLLAB_URL = "https://meta.icgc.org"
 
@@ -58,6 +58,9 @@ def filename_get_post(gnos_id, id_service_token, filename, project_code):
         filename_post(gnos_id, id_service_token, filename, project_code)
     return filename_get(gnos_id, filename)
 
+def upload(manifest_file):
+    subprocess.call(['icgc-storage-client ','--profile','collab','upload','--manifest',manifest_file])
+
 def quick_upload(id_service_token, gnos_id, files):
     manifest_file = gnos_id+".txt"
     with open(manifest_file,"w") as f:
@@ -65,7 +68,7 @@ def quick_upload(id_service_token, gnos_id, files):
         for _f in files:
             file_path = os.path.join(os.path.dirname(os.path.abspath(_f['file_name'])),_f['file_name'])
 
-            if not utils.get_file_md5(file_path) == _f['file_md5sum']:
+            if not file_utils.get_file_md5(file_path) == _f['file_md5sum']:
                 raise Exception(file_path+" does not match md5")    
 
             f.write(_f['object_id']+"\t"+file_path+"\t"+_f['file_md5sum']+"\n")
