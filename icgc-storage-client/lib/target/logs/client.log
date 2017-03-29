@@ -1,0 +1,261 @@
+2017-03-22 13:28:59.843  INFO 82174 --- [main] org.icgc.dcc.storage.client.ClientMain   : Starting ClientMain v1.0.23 on olm-baminou.oicr.on.ca with PID 82174 (/Users/baminou/Downloads/icgc-storage-client-1.0.23/lib/icgc-storage-client.jar started by baminou in /Users/baminou/Downloads/icgc-storage-client-1.0.23/lib)
+2017-03-22 13:28:59.851  INFO 82174 --- [main] org.icgc.dcc.storage.client.ClientMain   : The following profiles are active: aws
+2017-03-22 13:28:59.923  INFO 82174 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5c0369c4: startup date [Wed Mar 22 13:28:59 EDT 2017]; root of context hierarchy
+2017-03-22 13:29:00.860  WARN 82174 --- [main] o.i.d.s.client.config.ClientConfig       : No access token specified
+2017-03-22 13:29:01.029  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       : ----------------------------------------------------------------------------------------------------
+2017-03-22 13:29:01.032  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       : Command:  java  -jar classes! ...
+2017-03-22 13:29:01.032  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       : Version:  1.0.23
+2017-03-22 13:29:01.032  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       : Built:    1.0.23
+2017-03-22 13:29:01.032  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       : SCM:
+2017-03-22 13:29:01.092  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.id.abbrev    : 6185577
+2017-03-22 13:29:01.092  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.user.email   : ayang99@gmail.com
+2017-03-22 13:29:01.092  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.message.full : Feature/col 577 default layout (#75)  * implement new filename layout for downloads fix logback.xml config to reflect refactored class names introduced for Azure support  * update doc for new FILENAME output layout, suppress output of access token in terminal, fix reporting KB in progress  * minor cleanup 
+2017-03-22 13:29:01.092  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.id           : 6185577d32b9cc1d8d0b23e02acea5ddf5d42341
+2017-03-22 13:29:01.092  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.message.short: Feature/col 577 default layout (#75)
+2017-03-22 13:29:01.092  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.user.name    : Andy Yang
+2017-03-22 13:29:01.093  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          git.build.user.name     : Unknown
+2017-03-22 13:29:01.093  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.id.describe  : 1.0.22-3-g6185577
+2017-03-22 13:29:01.093  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          git.build.user.email    : Unknown
+2017-03-22 13:29:01.093  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          git.branch              : origin/develop
+2017-03-22 13:29:01.093  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.time         : 10.01.2017 @ 14:35:02 EST
+2017-03-22 13:29:01.093  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          git.build.time          : 10.01.2017 @ 15:03:36 EST
+2017-03-22 13:29:01.093  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          git.remote.origin.url   : git@github.com:icgc-dcc/dcc-storage
+2017-03-22 13:29:01.094  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       : Profiles: [aws]
+2017-03-22 13:29:01.094  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       : StandardEnvironment {activeProfiles=[aws], defaultProfiles=[default], propertySources=[systemProperties,systemEnvironment,random,applicationConfig: [classpath:/application.yml]#aws,applicationConfig: [classpath:/application.yml]]}:
+2017-03-22 13:29:01.094  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          systemProperties:
+2017-03-22 13:29:01.099  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - LOG_FILE: target/logs/client.log
+2017-03-22 13:29:01.099  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - PID: 82174
+2017-03-22 13:29:01.106  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - awt.toolkit: sun.lwawt.macosx.LWCToolkit
+2017-03-22 13:29:01.106  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.quiet: false
+2017-03-22 13:29:01.107  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.silent: false
+2017-03-22 13:29:01.107  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - file.encoding: UTF-8
+2017-03-22 13:29:01.107  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - file.encoding.pkg: sun.io
+2017-03-22 13:29:01.107  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - file.separator: /
+2017-03-22 13:29:01.107  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - ftp.nonProxyHosts: local|*.local|169.254/16|*.169.254/16
+2017-03-22 13:29:01.108  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - gopherProxySet: false
+2017-03-22 13:29:01.108  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - http.nonProxyHosts: local|*.local|169.254/16|*.169.254/16
+2017-03-22 13:29:01.108  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.awt.graphicsenv: sun.awt.CGraphicsEnvironment
+2017-03-22 13:29:01.108  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.awt.headless: true
+2017-03-22 13:29:01.108  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.awt.printerjob: sun.lwawt.macosx.CPrinterJob
+2017-03-22 13:29:01.109  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.class.path: icgc-storage-client.jar
+2017-03-22 13:29:01.109  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.class.version: 52.0
+2017-03-22 13:29:01.109  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.endorsed.dirs: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/endorsed
+2017-03-22 13:29:01.109  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.ext.dirs: /Users/baminou/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+2017-03-22 13:29:01.110  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.home: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre
+2017-03-22 13:29:01.110  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.io.tmpdir: /var/folders/gh/5y9lwqqn1wx666cy9zcp6slr0000gp/T/
+2017-03-22 13:29:01.110  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.library.path: /Users/baminou/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+2017-03-22 13:29:01.111  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.protocol.handler.pkgs: org.springframework.boot.loader
+2017-03-22 13:29:01.111  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.runtime.name: Java(TM) SE Runtime Environment
+2017-03-22 13:29:01.111  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.runtime.version: 1.8.0_121-b13
+2017-03-22 13:29:01.111  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.specification.name: Java Platform API Specification
+2017-03-22 13:29:01.111  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.specification.vendor: Oracle Corporation
+2017-03-22 13:29:01.112  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.specification.version: 1.8
+2017-03-22 13:29:01.112  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vendor: Oracle Corporation
+2017-03-22 13:29:01.112  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vendor.url: http://java.oracle.com/
+2017-03-22 13:29:01.112  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vendor.url.bug: http://bugreport.sun.com/bugreport/
+2017-03-22 13:29:01.113  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.version: 1.8.0_121
+2017-03-22 13:29:01.113  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vm.info: mixed mode
+2017-03-22 13:29:01.113  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vm.name: Java HotSpot(TM) 64-Bit Server VM
+2017-03-22 13:29:01.113  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vm.specification.name: Java Virtual Machine Specification
+2017-03-22 13:29:01.113  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vm.specification.vendor: Oracle Corporation
+2017-03-22 13:29:01.113  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vm.specification.version: 1.8
+2017-03-22 13:29:01.113  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vm.vendor: Oracle Corporation
+2017-03-22 13:29:01.113  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vm.version: 25.121-b13
+2017-03-22 13:29:01.113  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - line.separator: 
+
+2017-03-22 13:29:01.114  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - org.jboss.logging.provider: slf4j
+2017-03-22 13:29:01.114  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - os.arch: x86_64
+2017-03-22 13:29:01.114  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - os.name: Mac OS X
+2017-03-22 13:29:01.114  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - os.version: 10.11.6
+2017-03-22 13:29:01.114  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - path.separator: :
+2017-03-22 13:29:01.114  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - socksNonProxyHosts: local|*.local|169.254/16|*.169.254/16
+2017-03-22 13:29:01.114  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - spring.beaninfo.ignore: true
+2017-03-22 13:29:01.114  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - storage.profile: aws
+2017-03-22 13:29:01.114  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.arch.data.model: 64
+2017-03-22 13:29:01.115  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.boot.class.path: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/classes
+2017-03-22 13:29:01.115  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.boot.library.path: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib
+2017-03-22 13:29:01.115  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.cpu.endian: little
+2017-03-22 13:29:01.115  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.cpu.isalist: 
+2017-03-22 13:29:01.115  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.io.unicode.encoding: UnicodeBig
+2017-03-22 13:29:01.115  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.java.command: icgc-storage-client.jar
+2017-03-22 13:29:01.115  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.java.launcher: SUN_STANDARD
+2017-03-22 13:29:01.115  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.jnu.encoding: UTF-8
+2017-03-22 13:29:01.116  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.management.compiler: HotSpot 64-Bit Tiered Compilers
+2017-03-22 13:29:01.116  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.net.client.defaultConnectTimeout: 60000
+2017-03-22 13:29:01.116  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.net.client.defaultReadTimeout: 60000
+2017-03-22 13:29:01.116  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.os.patch.level: unknown
+2017-03-22 13:29:01.116  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - user.country: US
+2017-03-22 13:29:01.116  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - user.country.format: CA
+2017-03-22 13:29:01.116  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - user.dir: /Users/baminou/Downloads/icgc-storage-client-1.0.23/lib
+2017-03-22 13:29:01.116  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - user.home: /Users/baminou
+2017-03-22 13:29:01.116  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - user.language: en
+2017-03-22 13:29:01.116  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - user.name: baminou
+2017-03-22 13:29:01.117  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - user.timezone: America/Toronto
+2017-03-22 13:29:01.117  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          applicationConfig: [classpath:/application.yml]#aws:
+2017-03-22 13:29:01.117  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.ssl.custom: false
+2017-03-22 13:29:01.117  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - spring.profiles: aws
+2017-03-22 13:29:01.117  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - storage.url: https://virginia.cloud.icgc.org
+2017-03-22 13:29:01.117  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :          applicationConfig: [classpath:/application.yml]:
+2017-03-22 13:29:01.117  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.accessToken: ${accessToken:}
+2017-03-22 13:29:01.118  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.ansi: ${ansi:true}
+2017-03-22 13:29:01.118  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.connectTimeoutSeconds: 60
+2017-03-22 13:29:01.118  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.quiet: ${quiet:false}
+2017-03-22 13:29:01.118  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.readTimeoutSeconds: 60
+2017-03-22 13:29:01.118  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.silent: ${silent:false}
+2017-03-22 13:29:01.118  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.ssl.custom: false
+2017-03-22 13:29:01.118  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - logging.file: target/logs/client.log
+2017-03-22 13:29:01.118  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - metadata.ssl.enabled: true
+2017-03-22 13:29:01.118  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - metadata.url: https://meta.icgc.org
+2017-03-22 13:29:01.119  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - mount.logging: false
+2017-03-22 13:29:01.119  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - portal.url: https://dcc.icgc.org
+2017-03-22 13:29:01.119  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - storage.retryNumber: 10
+2017-03-22 13:29:01.119  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - storage.retryTimeout: 1
+2017-03-22 13:29:01.119  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - storage.url: http://localhost:5431
+2017-03-22 13:29:01.119  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - transport.fileFrom: memory
+2017-03-22 13:29:01.119  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - transport.memory: 1
+2017-03-22 13:29:01.119  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       :             - transport.parallel: 6
+2017-03-22 13:29:01.119  INFO 82174 --- [main] o.i.d.s.client.config.ClientBanner       : ----------------------------------------------------------------------------------------------------
+
+
+2017-03-22 13:29:01.179 ERROR 82174 --- [main] org.icgc.dcc.storage.client.ClientMain   : Missing command: 
+
+com.beust.jcommander.MissingCommandException: Command name is empty. Please specify a command to execute
+	at org.icgc.dcc.storage.client.cli.Parameters.checkCommand(Parameters.java:41) ~[classes!/:1.0.23]
+	at org.icgc.dcc.storage.client.ClientMain.resolveCommand(ClientMain.java:183) [classes!/:1.0.23]
+	at org.icgc.dcc.storage.client.ClientMain.run(ClientMain.java:133) [classes!/:1.0.23]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:800) [spring-boot-1.4.1.RELEASE.jar!/:1.4.1.RELEASE]
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:784) [spring-boot-1.4.1.RELEASE.jar!/:1.4.1.RELEASE]
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:771) [spring-boot-1.4.1.RELEASE.jar!/:1.4.1.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316) [spring-boot-1.4.1.RELEASE.jar!/:1.4.1.RELEASE]
+	at org.springframework.boot.builder.SpringApplicationBuilder.run(SpringApplicationBuilder.java:134) [spring-boot-1.4.1.RELEASE.jar!/:1.4.1.RELEASE]
+	at org.icgc.dcc.storage.client.ClientMain.main(ClientMain.java:109) [classes!/:1.0.23]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_121]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_121]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_121]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_121]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48) [icgc-storage-client.jar:1.0.23]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87) [icgc-storage-client.jar:1.0.23]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50) [icgc-storage-client.jar:1.0.23]
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:58) [icgc-storage-client.jar:1.0.23]
+
+2017-03-22 13:29:01.186  INFO 82174 --- [Thread-1] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@5c0369c4: startup date [Wed Mar 22 13:28:59 EDT 2017]; root of context hierarchy
+2017-03-22 13:29:11.145  INFO 82183 --- [main] org.icgc.dcc.storage.client.ClientMain   : Starting ClientMain v1.0.23 on olm-baminou.oicr.on.ca with PID 82183 (/Users/baminou/Downloads/icgc-storage-client-1.0.23/lib/icgc-storage-client.jar started by baminou in /Users/baminou/Downloads/icgc-storage-client-1.0.23/lib)
+2017-03-22 13:29:11.152  INFO 82183 --- [main] org.icgc.dcc.storage.client.ClientMain   : The following profiles are active: aws
+2017-03-22 13:29:11.202  INFO 82183 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5c0369c4: startup date [Wed Mar 22 13:29:11 EDT 2017]; root of context hierarchy
+2017-03-22 13:29:11.965  WARN 82183 --- [main] o.i.d.s.client.config.ClientConfig       : No access token specified
+2017-03-22 13:29:12.127  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       : ----------------------------------------------------------------------------------------------------
+2017-03-22 13:29:12.130  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       : Command:  java  -jar classes! ...
+2017-03-22 13:29:12.131  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       : Version:  1.0.23
+2017-03-22 13:29:12.131  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       : Built:    1.0.23
+2017-03-22 13:29:12.131  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       : SCM:
+2017-03-22 13:29:12.198  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.id.abbrev    : 6185577
+2017-03-22 13:29:12.198  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.user.email   : ayang99@gmail.com
+2017-03-22 13:29:12.199  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.message.full : Feature/col 577 default layout (#75)  * implement new filename layout for downloads fix logback.xml config to reflect refactored class names introduced for Azure support  * update doc for new FILENAME output layout, suppress output of access token in terminal, fix reporting KB in progress  * minor cleanup 
+2017-03-22 13:29:12.199  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.id           : 6185577d32b9cc1d8d0b23e02acea5ddf5d42341
+2017-03-22 13:29:12.199  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.message.short: Feature/col 577 default layout (#75)
+2017-03-22 13:29:12.199  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.user.name    : Andy Yang
+2017-03-22 13:29:12.199  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          git.build.user.name     : Unknown
+2017-03-22 13:29:12.200  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.id.describe  : 1.0.22-3-g6185577
+2017-03-22 13:29:12.200  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          git.build.user.email    : Unknown
+2017-03-22 13:29:12.200  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          git.branch              : origin/develop
+2017-03-22 13:29:12.200  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          git.commit.time         : 10.01.2017 @ 14:35:02 EST
+2017-03-22 13:29:12.200  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          git.build.time          : 10.01.2017 @ 15:03:36 EST
+2017-03-22 13:29:12.200  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          git.remote.origin.url   : git@github.com:icgc-dcc/dcc-storage
+2017-03-22 13:29:12.201  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       : Profiles: [aws]
+2017-03-22 13:29:12.201  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       : StandardEnvironment {activeProfiles=[aws], defaultProfiles=[default], propertySources=[systemProperties,systemEnvironment,random,applicationConfig: [classpath:/application.yml]#aws,applicationConfig: [classpath:/application.yml]]}:
+2017-03-22 13:29:12.201  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          systemProperties:
+2017-03-22 13:29:12.205  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - LOG_FILE: target/logs/client.log
+2017-03-22 13:29:12.205  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - PID: 82183
+2017-03-22 13:29:12.205  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - awt.toolkit: sun.lwawt.macosx.LWCToolkit
+2017-03-22 13:29:12.207  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.quiet: false
+2017-03-22 13:29:12.207  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.silent: false
+2017-03-22 13:29:12.208  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - file.encoding: UTF-8
+2017-03-22 13:29:12.208  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - file.encoding.pkg: sun.io
+2017-03-22 13:29:12.208  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - file.separator: /
+2017-03-22 13:29:12.208  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - ftp.nonProxyHosts: local|*.local|169.254/16|*.169.254/16
+2017-03-22 13:29:12.208  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - gopherProxySet: false
+2017-03-22 13:29:12.208  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - http.nonProxyHosts: local|*.local|169.254/16|*.169.254/16
+2017-03-22 13:29:12.209  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.awt.graphicsenv: sun.awt.CGraphicsEnvironment
+2017-03-22 13:29:12.209  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.awt.headless: true
+2017-03-22 13:29:12.209  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.awt.printerjob: sun.lwawt.macosx.CPrinterJob
+2017-03-22 13:29:12.209  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.class.path: icgc-storage-client.jar
+2017-03-22 13:29:12.209  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.class.version: 52.0
+2017-03-22 13:29:12.209  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.endorsed.dirs: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/endorsed
+2017-03-22 13:29:12.209  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.ext.dirs: /Users/baminou/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+2017-03-22 13:29:12.210  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.home: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre
+2017-03-22 13:29:12.210  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.io.tmpdir: /var/folders/gh/5y9lwqqn1wx666cy9zcp6slr0000gp/T/
+2017-03-22 13:29:12.210  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.library.path: /Users/baminou/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+2017-03-22 13:29:12.210  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.protocol.handler.pkgs: org.springframework.boot.loader
+2017-03-22 13:29:12.210  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.runtime.name: Java(TM) SE Runtime Environment
+2017-03-22 13:29:12.210  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.runtime.version: 1.8.0_121-b13
+2017-03-22 13:29:12.210  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.specification.name: Java Platform API Specification
+2017-03-22 13:29:12.211  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.specification.vendor: Oracle Corporation
+2017-03-22 13:29:12.211  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.specification.version: 1.8
+2017-03-22 13:29:12.211  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vendor: Oracle Corporation
+2017-03-22 13:29:12.211  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vendor.url: http://java.oracle.com/
+2017-03-22 13:29:12.211  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vendor.url.bug: http://bugreport.sun.com/bugreport/
+2017-03-22 13:29:12.211  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.version: 1.8.0_121
+2017-03-22 13:29:12.211  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vm.info: mixed mode
+2017-03-22 13:29:12.212  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vm.name: Java HotSpot(TM) 64-Bit Server VM
+2017-03-22 13:29:12.212  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vm.specification.name: Java Virtual Machine Specification
+2017-03-22 13:29:12.212  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vm.specification.vendor: Oracle Corporation
+2017-03-22 13:29:12.212  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vm.specification.version: 1.8
+2017-03-22 13:29:12.212  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vm.vendor: Oracle Corporation
+2017-03-22 13:29:12.212  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - java.vm.version: 25.121-b13
+2017-03-22 13:29:12.212  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - line.separator: 
+
+2017-03-22 13:29:12.212  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - org.jboss.logging.provider: slf4j
+2017-03-22 13:29:12.213  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - os.arch: x86_64
+2017-03-22 13:29:12.214  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - os.name: Mac OS X
+2017-03-22 13:29:12.214  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - os.version: 10.11.6
+2017-03-22 13:29:12.214  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - path.separator: :
+2017-03-22 13:29:12.214  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - socksNonProxyHosts: local|*.local|169.254/16|*.169.254/16
+2017-03-22 13:29:12.215  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - spring.beaninfo.ignore: true
+2017-03-22 13:29:12.215  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - storage.profile: aws
+2017-03-22 13:29:12.215  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.arch.data.model: 64
+2017-03-22 13:29:12.215  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.boot.class.path: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/classes
+2017-03-22 13:29:12.215  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.boot.library.path: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib
+2017-03-22 13:29:12.215  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.cpu.endian: little
+2017-03-22 13:29:12.215  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.cpu.isalist: 
+2017-03-22 13:29:12.216  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.io.unicode.encoding: UnicodeBig
+2017-03-22 13:29:12.216  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.java.command: icgc-storage-client.jar --help
+2017-03-22 13:29:12.216  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.java.launcher: SUN_STANDARD
+2017-03-22 13:29:12.216  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.jnu.encoding: UTF-8
+2017-03-22 13:29:12.216  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.management.compiler: HotSpot 64-Bit Tiered Compilers
+2017-03-22 13:29:12.216  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.net.client.defaultConnectTimeout: 60000
+2017-03-22 13:29:12.216  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.net.client.defaultReadTimeout: 60000
+2017-03-22 13:29:12.216  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - sun.os.patch.level: unknown
+2017-03-22 13:29:12.216  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - user.country: US
+2017-03-22 13:29:12.217  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - user.country.format: CA
+2017-03-22 13:29:12.217  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - user.dir: /Users/baminou/Downloads/icgc-storage-client-1.0.23/lib
+2017-03-22 13:29:12.217  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - user.home: /Users/baminou
+2017-03-22 13:29:12.217  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - user.language: en
+2017-03-22 13:29:12.217  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - user.name: baminou
+2017-03-22 13:29:12.217  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - user.timezone: America/Toronto
+2017-03-22 13:29:12.217  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          applicationConfig: [classpath:/application.yml]#aws:
+2017-03-22 13:29:12.217  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.ssl.custom: false
+2017-03-22 13:29:12.217  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - spring.profiles: aws
+2017-03-22 13:29:12.218  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - storage.url: https://virginia.cloud.icgc.org
+2017-03-22 13:29:12.218  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :          applicationConfig: [classpath:/application.yml]:
+2017-03-22 13:29:12.218  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.accessToken: ${accessToken:}
+2017-03-22 13:29:12.218  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.ansi: ${ansi:true}
+2017-03-22 13:29:12.218  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.connectTimeoutSeconds: 60
+2017-03-22 13:29:12.218  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.quiet: ${quiet:false}
+2017-03-22 13:29:12.218  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.readTimeoutSeconds: 60
+2017-03-22 13:29:12.218  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.silent: ${silent:false}
+2017-03-22 13:29:12.219  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - client.ssl.custom: false
+2017-03-22 13:29:12.219  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - logging.file: target/logs/client.log
+2017-03-22 13:29:12.219  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - metadata.ssl.enabled: true
+2017-03-22 13:29:12.219  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - metadata.url: https://meta.icgc.org
+2017-03-22 13:29:12.219  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - mount.logging: false
+2017-03-22 13:29:12.219  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - portal.url: https://dcc.icgc.org
+2017-03-22 13:29:12.219  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - storage.retryNumber: 10
+2017-03-22 13:29:12.219  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - storage.retryTimeout: 1
+2017-03-22 13:29:12.220  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - storage.url: http://localhost:5431
+2017-03-22 13:29:12.220  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - transport.fileFrom: memory
+2017-03-22 13:29:12.220  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - transport.memory: 1
+2017-03-22 13:29:12.220  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       :             - transport.parallel: 6
+2017-03-22 13:29:12.220  INFO 82183 --- [main] o.i.d.s.client.config.ClientBanner       : ----------------------------------------------------------------------------------------------------
+
+
+2017-03-22 13:29:12.278  INFO 82183 --- [Thread-1] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@5c0369c4: startup date [Wed Mar 22 13:29:11 EDT 2017]; root of context hierarchy

@@ -9,8 +9,8 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-api_access_url = "https://ega.ebi.ac.uk/ega/rest/access/v2"
-api_download_url = "http://ega.ebi.ac.uk/ega/rest/ds/v2"
+_api_access_url = "https://ega.ebi.ac.uk/ega/rest/access/v2"
+_api_download_url = "http://ega.ebi.ac.uk/ega/rest/ds/v2"
 
 def login(email, password):
 	""" Login to the ega api
@@ -24,13 +24,17 @@ def login(email, password):
 
 		Raises:
 			ValueError: If `email` format is not a valid email
+			ValueError: If credentials ar invalid
 	"""
 
 	# Email must be a valid email
 	if not re.match("[^@]+@[^@]+\.[^@]+", email):
 		raise ValueError(email+" is not a valid email")
 
-	return result_from_response(requests.get(_api_access_endpoint("/users/"+email+"?pass="+password, None), verify=False))[1]
+	try:
+		return _result_from_response(requests.get(_api_access_endpoint("/users/"+email+"?pass="+password, None), verify=False))[1]
+	except ValueError, err:
+		raise ValueError("EGA response: "+str(err)+" - Verify email and password")
 
 def logout(session_token):
 	""" Logout from the ega api
@@ -42,8 +46,8 @@ def logout(session_token):
 			dict: Logout server response
 
 	"""
-	validate_session_token(session_token)
-	return result_from_response(requests.get(_api_access_endpoint("/users/logout",session_token), verify=False))[0]
+	_validate_session_token(session_token)
+	return _result_from_response(requests.get(_api_access_endpoint("/users/logout",session_token), verify=False))[0]
 
 def datasets_index(session_token):
 	""" List the dataset ids
@@ -54,8 +58,8 @@ def datasets_index(session_token):
 		Return:
 			dict: List of dataset ids
 	"""
-	validate_session_token(session_token)
-	return result_from_response(requests.get(_api_access_endpoint("/datasets",session_token), verify=False))
+	_validate_session_token(session_token)
+	return _result_from_response(requests.get(_api_access_endpoint("/datasets",session_token), verify=False))
 
 def files_index(session_token, dataset):
 	""" List files in a dataset
@@ -67,8 +71,8 @@ def files_index(session_token, dataset):
 		Return:
 			dict: List of files in the dataset
 	"""
-	validate_session_token(session_token)
-	return result_from_response(requests.get(_api_access_endpoint("/datasets/"+dataset+"/files",session_token), verify=False))
+	_validate_session_token(session_token)
+	return _result_from_response(requests.get(_api_access_endpoint("/datasets/"+dataset+"/files",session_token), verify=False))
 
 def files_get(session_token, file_id):
 	""" Informations about one file
@@ -80,8 +84,8 @@ def files_get(session_token, file_id):
 		Return:
 			dict: Informations about the requested file
 	"""
-	validate_session_token(session_token)
-	return result_from_response(requests.get(_api_access_endpoint("/files/"+file_id,session_token), verify=True))
+	_validate_session_token(session_token)
+	return _result_from_response(requests.get(_api_access_endpoint("/files/"+file_id,session_token), verify=False))
 
 def requests_index(session_token):
 	""" List of indexes
@@ -92,8 +96,8 @@ def requests_index(session_token):
 		Return:
 			dict: All opened requests in the account
 	"""
-	validate_session_token(session_token)
-	return result_from_response(requests.get(_api_access_endpoint("/requests",session_token), verify=False))
+	_validate_session_token(session_token)
+	return _result_from_response(requests.get(_api_access_endpoint("/requests",session_token), verify=False))
 
 def requests_get(session_token, request_label):
 	""" Informations about a request
@@ -104,8 +108,8 @@ def requests_get(session_token, request_label):
 		Return:
 			dict: The informations about the requested request
 	"""
-	validate_session_token(session_token)
-	return result_from_response(requests.get(_api_access_endpoint("/requests/"+request_label,session_token), verify=False))
+	_validate_session_token(session_token)
+	return _result_from_response(requests.get(_api_access_endpoint("/requests/"+request_label,session_token), verify=False))
 
 def requests_delete(session_token, request_label):
 	""" Delete an existing request
@@ -116,8 +120,8 @@ def requests_delete(session_token, request_label):
 		Return:
 			dict: The deletion status
 	"""
-	validate_session_token(session_token)
-	return result_from_response(requests.get(_api_access_endpoint("/requests/delete/"+request_label, session_token), verify=False))
+	_validate_session_token(session_token)
+	return _result_from_response(requests.get(_api_access_endpoint("/requests/delete/"+request_label, session_token), verify=False))
 
 def requests_create(session_token, object_id, type, encryption_key, request_label):
 	"""  Delete an existing request 
@@ -136,7 +140,7 @@ def requests_create(session_token, object_id, type, encryption_key, request_labe
 			ValueError: The type has to be either files or datasets
 			ValueError: An error from the ega server
 	"""
-	validate_session_token(session_token)
+	_validate_session_token(session_token)
 
 	if not type.lower() in ['datasets','files']:
 		raise ValueError("Request can be created only on files or datasets")
@@ -158,8 +162,8 @@ def tickets_get(session_token, ticket_id):
 		Return:
 			dict: The informations about the existing ticket
 	"""
-	validate_session_token(session_token)
-	return result_from_response(requests.get(_api_access_endpoint("/requests/ticket/"+ticket_id,session_token), verify=False))
+	_validate_session_token(session_token)
+	return _result_from_response(requests.get(_api_access_endpoint("/requests/ticket/"+ticket_id,session_token), verify=False))
 
 def tickets_delete(session_token, ticket_id):
 	""" Delete an existing ticket
@@ -171,12 +175,8 @@ def tickets_delete(session_token, ticket_id):
 		Return:
 			dict: The EGA response after deletion
 	"""
-	validate_session_token(session_token)
-	return result_from_response(requests.get(_api_access_endpoint("/requests/ticket/delete/"+ticket_id,session_token), verify=False))
-
-def results(ticket_id):
-	r = requests.get(api_download_url+"/results/"+ticket_id, verify=False)
-	return r.text
+	_validate_session_token(session_token)
+	return _result_from_response(requests.get(_api_access_endpoint("/requests/ticket/delete/"+ticket_id,session_token), verify=False))
 
 def _api_access_endpoint(endpoint,session_token=None):
 	""" Create the endpoint to call
@@ -189,10 +189,10 @@ def _api_access_endpoint(endpoint,session_token=None):
 			The endpoint URL to use
 	"""
 	if session_token == None:
-		return api_access_url+endpoint
-	return api_access_url+endpoint+"?session="+session_token
+		return _api_access_url+endpoint
+	return _api_access_url+endpoint+"?session="+session_token
 
-def validate_session_token(session_token):
+def _validate_session_token(session_token):
 	""" Check if the session token is valid
 
 		Args:
@@ -204,7 +204,7 @@ def validate_session_token(session_token):
 	if session_token == None:
 		raise ValueError("EGA session token is empty")
 
-def validate_response(json_response):
+def _validate_response(json_response):
 	""" Check if the response code is 200
 
 		Args:
@@ -216,14 +216,14 @@ def validate_response(json_response):
 	if json_response['header']['code'] != "200":
 		raise ValueError(json_response['header']['userMessage'])
 
-def result_from_response(raw_response):
+def _result_from_response(raw_response):
 	""" Retrieve the result from server response
 
 		Args:
 			raw_response:	A response from the server
 	"""
 	r = json.loads(raw_response.text)
-	validate_response(r)
+	_validate_response(r)
 	return r['response']['result']
 
 def download_request(email, password, request_label,type, output_folder, streams=7):

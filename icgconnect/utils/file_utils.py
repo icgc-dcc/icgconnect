@@ -1,3 +1,5 @@
+import hashlib
+import os
 
 def get_file_md5(fname):
     hash_md5 = hashlib.md5()
@@ -5,3 +7,6 @@ def get_file_md5(fname):
         for chunk in iter(lambda: f.read(4096), b""):
             hash_md5.update(chunk)
     return hash_md5.hexdigest()
+
+def delete_file(filename):
+	os.remove(filename)

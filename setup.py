@@ -8,6 +8,9 @@ setup(name='icgconnect',
       author_email='brice.aminou@oicr.on.ca',
       license='MIT',
       packages=['icgconnect'],
+      install_requires=[
+            'requests'
+      ],
       zip_safe=True,
       test_suite='nose.collector',
       tests_require=['nose'])
