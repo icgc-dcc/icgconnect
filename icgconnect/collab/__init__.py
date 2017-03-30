@@ -6,6 +6,7 @@ import os
 import csv
 import hashlib
 from icgconnect.utils import file_utils
+from pkg_resources import resource_string
 
 _COLLAB_URL = "https://meta.icgc.org"
 
@@ -172,9 +173,8 @@ def upload(manifest_file):
         Args:
             manifest_file (str):    The local path of a manifest file
     """
-    _validate_manifest_file(manifest_file)
-
-    subprocess.call(['icgc-storage-client/bin/icgc-storage-client','--profile','collab','upload','--manifest',manifest_file])
+    #_validate_manifest_file(manifest_file)
+    subprocess.call(['icgc-storage-client','--profile','collab','upload','--manifest',manifest_file])
 
 def _validate_manifest_file(manifest_file):
     """ Validates if the manifest file for collaboratory upload has the required format
@@ -290,10 +290,10 @@ def generate_manifest_file(output_file, files=None):
         for _f in files:
             if not 'object_id' in _f:
                 raise KeyError("object_id key missing from files array")
-            if not 'KeyError' in _f:
-                raise ValueError("file_md5sum key missing from files array")
             if not 'file_name' in _f:
-                raise KeyError("file_name key missing from files array")
+                raise KeyError("file_name key missing from files array: "+_f['file_name'])
+            if not 'file_md5sum' in _f:
+                raise ValueError("file_md5sum key missing from files array: "+_f['file_name'])
 
     with open(output_file,"w") as f:
         f.write("object_id\tfile_name\tmd5\n")
@@ -322,7 +322,7 @@ def delete_manifest_file(manifest_file, related_files=False):
     file_utils.delete(manifest_file)
     return True
 
-def add_to_manifest_file(manifest_file, object_id, filname, md5):
+def add_to_manifest_file(manifest_file, object_id, filename, md5):
     """ Add an entry to the manifest file
 
         Args:
