@@ -1,1 +1,4 @@
-__all__ = ["collab", "ega","utils","xml_audit"]
+import icgconnect.collab
+import icgconnect.ega
+import icgconnect.icgc
+import icgconnect.xml_audit
