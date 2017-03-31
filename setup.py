@@ -7,7 +7,7 @@ setup(name='icgconnect',
       author='Brice Aminou',
       author_email='brice.aminou@oicr.on.ca',
       license='MIT',
-      packages=['icgconnect'],
+      packages=['icgconnect','icgconnect.collab','icgconnect.ega','icgconnect.icgc','icgconnect.utils','icgconnect.xml_audit'],
       install_requires=[
             'requests'
       ],
