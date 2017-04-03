@@ -45,4 +45,5 @@ def generate_bai_from_bam(bam_file_path, file_output):
 		raise ValueError("The input file cannot be the same as the output file: "+bam_file_path)
 
 	pysam.index(bam_file_path)
-	copyfile(bam_file_path+".bai",file_output)
+	if not bam_file_path+".bai" == file_output:
+		copyfile(bam_file_path+".bai",file_output)
