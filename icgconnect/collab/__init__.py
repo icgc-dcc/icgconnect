@@ -164,7 +164,7 @@ def filename_post(gnos_id, id_service_token, filename, project_code):
 
 def filename_get_post(gnos_id, id_service_token, filename, project_code):
     try:
-        filename_get_id(gnos_id, filename):
+        filename_get_id(gnos_id, filename)
     except ValueError, err:
         filename_post(gnos_id, id_service_token, filename, project_code)
     return filename_get(gnos_id, filename)
