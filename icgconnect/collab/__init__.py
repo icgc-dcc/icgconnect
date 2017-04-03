@@ -114,7 +114,7 @@ def filename_get_id(gnos_id, filename):
             str:    The related object id
     """
     if not filename_exists(gnos_id, filename):
-        raise ValueError("The requested filename doest not exist: "+filename)
+        raise ValueError("The requested filename does not exist: "+filename)
     return filename_get(gnos_id, filename)['id']
 
 def filename_get(gnos_id, filename):
@@ -163,7 +163,9 @@ def filename_post(gnos_id, id_service_token, filename, project_code):
     return r.text
 
 def filename_get_post(gnos_id, id_service_token, filename, project_code):
-    if filename_get_id(gnos_id, filename) == None:
+    try:
+        filename_get_id(gnos_id, filename):
+    except ValueError, err:
         filename_post(gnos_id, id_service_token, filename, project_code)
     return filename_get(gnos_id, filename)
 
