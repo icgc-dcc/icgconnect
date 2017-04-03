@@ -9,7 +9,8 @@ setup(name='icgconnect',
       license='MIT',
       packages=['icgconnect','icgconnect.collab','icgconnect.ega','icgconnect.icgc','icgconnect.utils','icgconnect.xml_audit'],
       install_requires=[
-            'requests'
+            'requests',
+            'pysam'
       ],
       zip_safe=True,
       test_suite='nose.collector',

@@ -1,6 +1,7 @@
 import hashlib
 import os
 from shutil import copyfile
+import pysam
 
 def get_file_md5(fname):
     hash_md5 = hashlib.md5()
