@@ -163,7 +163,7 @@ def filename_post(gnos_id, id_service_token, filename, project_code):
     return r.text
 
 def filename_get_post(gnos_id, id_service_token, filename, project_code):
-    if not filename_exists(gnos_id, filname):
+    if not filename_exists(gnos_id, filename):
         filename_post(gnos_id, id_service_token, filename, project_code)
     return filename_get(gnos_id, filename)
 
