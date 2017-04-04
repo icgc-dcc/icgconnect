@@ -294,7 +294,7 @@ def generate_manifest_file(output_file, files=None):
         f.write("object_id\tfile_name\tmd5\n")
         if not files == None:
             for _f in files:
-                file_path = _f['file_name']
+                file_path = os.path.join(os.path.dirname(os.path.abspath(_f['file_name'])),_f['file_name'])
                 f.write(_f['object_id']+"\t"+file_path+"\t"+_f['file_md5sum']+"\n")
     return True
 
