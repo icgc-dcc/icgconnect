@@ -162,14 +162,14 @@ def filename_get_post(gnos_id, id_service_token, filename, project_code):
         filename_post(gnos_id, id_service_token, filename, project_code)
     return filename_get(gnos_id, filename)
 
-def upload(manifest_file):
+def upload(manifest_file, icgc_storage_client):
     """ Upload files listed in a manifest file to Collaboratory
 
         Args:
             manifest_file (str):    The local path of a manifest file
     """
     #_validate_manifest_file(manifest_file)
-    subprocess.call(['icgc-storage-client','--profile','collab','upload','--manifest',manifest_file])
+    subprocess.call([icgc_storage_client,'--profile','collab','upload','--manifest',manifest_file])
 
 def _validate_manifest_file(manifest_file):
     """ Validates if the manifest file for collaboratory upload has the required format
@@ -329,11 +329,11 @@ def add_to_manifest_file(manifest_file, object_id, filename, md5):
     with open(manifest_file, "a") as f:
         f.write(object_id+"\t"+filname+"\t"+md5+"\n")
 
-def quick_upload(id_service_token, gnos_id, files):
+def quick_upload(id_service_token, gnos_id, files, icgc_storage_client):
     manifest_file = gnos_id+".txt"
     generate_manifest_file(manifest_file, files)
     validate_manifest_file(gnos_id, manifest_file)
-    upload(manifest_file)
+    upload(manifest_file, icgc_storage_client)
     delete_manifest_file(manifest_file, True)
 
 
