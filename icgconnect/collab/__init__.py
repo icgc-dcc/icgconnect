@@ -238,8 +238,8 @@ def _validate_file_to_upload(gnos_id, filename, md5, object_id):
     if not file_utils.get_file_md5(filename) == md5:
         raise ValueError("MD5 sum of the file is not matching: "+filename)
 
-    if not filename_exists(gnos_id, filename):
-        raise ValueError("A related entity has not been created yet: GNOS id: "+gnos_id+", filename: "+filename)
+    #if not filename_exists(gnos_id, filename):
+    #    raise ValueError("A related entity has not been created yet: GNOS id: "+gnos_id+", filename: "+filename)
 
 
 def validate_manifest_file(gnos_id, manifest_file):
