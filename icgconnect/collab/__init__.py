@@ -80,14 +80,6 @@ def entities_get_post(gnos_id, id_service_token, filename, project_code):
     except ValueError, err:
         raise ValueError("Entity cannot be created. Please verify the provided information. GNOS id: "+gnos_id+", service token: "+id_service_token+", filename: "+filename+", project code: "+project_code)
 
-def entities_get_entity_id(gnos_id):
-    """ Retrieve the object id of an existing entity
-
-        Returns:
-            str:    The entity object id
-    """
-    return entities_get(gnos_id).get('id')
-
 def entities_exists(gnos_id):
     """ Check if entity exists in the records
 
@@ -151,8 +143,11 @@ def filename_post(gnos_id, id_service_token, filename, project_code):
             ValueError: The filename already exists in collaboratory
             ValueError: The file cannot be added because of invalid informations
     """
-    if not filename_get_id(gnos_id, filename) == None:
-        raise ValueError("Filename already exists in collaboratory: "+gnos_id+" - "+filename)
+    try:
+        _file = filename_get_id(gnos_id, filename)
+        return _file
+    except ValueError, err:
+        pass
 
     headers = {'Content-Type': 'application/json','Authorization': 'Bearer ' + id_service_token}
     body = {"gnosId": gnos_id,"fileName": filename,"projectCode": project_code,"access": "controlled"}
