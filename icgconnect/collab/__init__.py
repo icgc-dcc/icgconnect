@@ -314,7 +314,7 @@ def delete_manifest_file(manifest_file, related_files=False):
             reader = csv.DictReader(f, delimiter='\t')
             for row in reader:
                 file_utils.delete_file(row['file_name'])
-    file_utils.delete(manifest_file)
+    file_utils.delete_file(manifest_file)
     return True
 
 def add_to_manifest_file(manifest_file, object_id, filename, md5):

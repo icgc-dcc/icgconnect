@@ -124,7 +124,7 @@ def requests_delete(session_token, request_label):
 	return _result_from_response(requests.get(_api_access_endpoint("/requests/delete/"+request_label, session_token), verify=False))
 
 def requests_create(session_token, object_id, type, encryption_key, request_label):
-	"""  Delete an existing request 
+	"""  Create a new request 
 
 		Args:
 			session_token: A valid session token
@@ -226,17 +226,17 @@ def _result_from_response(raw_response):
 	_validate_response(r)
 	return r['response']['result']
 
-def download_request(email, password, request_label,type, output_folder, streams=7):
+def download_request(session_token, request_label, type,output_file):
 	if not type.lower() in ['datasets','files']:
 		raise ValueError("Request can be created only on files or datasets")
 
 	if type == "files":
-		subprocess.call(['java','-jar','EgaDemoClient.jar','-p',email,password,'-dr',request_label,'-path',output_folder,'-nt',str(streams)])
-		#r = requests.get(api_download_url+"/downloads/"+ticket_id,headers={'Accept': 'application/octet-stream'}, stream=True)
-		#with open(output_file,"wb") as f:
-		#	for chunk in r.iter_content(chunk_size=1024):
-		#		if chunk:
-		#			f.write(chunk)
+		ticket_id = requests_get(session_token, request_label)[0].get('ticket')
+		r = requests.get(_api_download_url+"/downloads/"+ticket_id,headers={'Accept': 'application/octet-stream'}, stream=True)
+		with open(output_file,"wb") as f:
+			for chunk in r.iter_content(chunk_size=1024):
+				if chunk:
+					f.write(chunk)
 
 def decrypt_encrypted_file(email,password,_file,decryption_key):
 	""" Decrypt an ega encrypted file
