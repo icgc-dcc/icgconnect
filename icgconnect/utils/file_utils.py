@@ -1,16 +1,16 @@
 import hashlib
 import os
 from shutil import copyfile
-import pysam
+#import pysam
 
 def get_file_md5(fname):
 	if not os.path.isfile(fname):
 		raise ValueError("The file does not exist: "+fname)
-    hash_md5 = hashlib.md5()
-    with open(fname, "rb") as f:
-        for chunk in iter(lambda: f.read(4096), b""):
-            hash_md5.update(chunk)
-    return hash_md5.hexdigest()
+	hash_md5 = hashlib.md5()
+	with open(fname, "rb") as f:
+		for chunk in iter(lambda: f.read(4096), b""):
+			hash_md5.update(chunk)
+	return hash_md5.hexdigest()
 
 def get_file_size(fname):
 	if not os.path.isfile(fname):
