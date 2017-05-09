@@ -327,9 +327,9 @@ def add_to_manifest_file(manifest_file, object_id, filename, md5):
             md5 (str):              MD5 sum of the file to be added
     """
     with open(manifest_file, "a") as f:
-        f.write(object_id+"\t"+filname+"\t"+md5+"\n")
+        f.write(object_id+"\t"+filename+"\t"+md5+"\n")
 
-def quick_upload(id_service_token, gnos_id, files, icgc_storage_client):
+def quick_upload(gnos_id, files, icgc_storage_client):
     manifest_file = gnos_id+".txt"
     generate_manifest_file(manifest_file, files)
     validate_manifest_file(gnos_id, manifest_file)
