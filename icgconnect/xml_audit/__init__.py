@@ -232,7 +232,7 @@ def _url_exists(url_path):
 	"""
 	return requests.get(url_path).status_code == 200
 
-def quick_generate(project_folder, project_name, output_file,dataset_accession, sample_accession=None, study_accession=None, ega_run_accession=None, experiment_accession=None):
+def quick_generate(project_folder, project_name, output_file,dataset_accession, sample_accession=None, study_accession=None, ega_run_accession=None, experiment_accession=None, include_dataset=True):
 	"""
 	Generates the combination of xmls requested
 	:param project_folder: 			The folder containing all the projects
@@ -251,7 +251,7 @@ def quick_generate(project_folder, project_name, output_file,dataset_accession, 
 	samples_xml = None
 	study_xml = None
 
-	if not dataset_accession == None:
+	if include_dataset:
 		dataset_xml = get_dataset(project_folder, project_name, dataset_accession)
 
 	if not sample_accession == None:
