@@ -40,6 +40,18 @@ def get_experiments(project_folder, project_name, dataset_accession, ega_experim
 	url_path = get_experiment_file_path(project_folder,project_name, dataset_accession, ega_experiment_accession)
 	return _get_obj_xml(url_path, 'EXPERIMENT_SET', 'experiments_xml')
 
+def get_analyses(project_folder, project_name, dataset_accession, ega_analysis_accession):
+	"""
+	Get xml file of an analysis
+	:param project_folder: 				A folder containing datasets related to a project
+	:param project_name: 				A project name in the project folder
+	:param dataset_accession: 			The dataset EGA accession (EGAD...)
+	:param ega_analysis_accession: 		The analysis EGA accession (EGAZ...)
+	:return:  An xml string related to the analysis
+	"""
+	url_path = get_analysis_file_path(project_folder,project_name, dataset_accession, ega_analysis_accession)
+	return _get_obj_xml(url_path, 'ANALYSIS_SET', 'analyses_xml')
+
 def get_samples(project_folder, project_name, dataset_accession, sample_accession):
 	"""
 	Get xml file of a sample
@@ -96,6 +108,17 @@ def get_experiment_file_path(project_folder, project_name, dataset_accession, eg
 	"""
 	return _get_object_file_path(project_folder, project_name, dataset_accession, ega_experiment_accession, 'experiments','experiment.xml')
 
+def get_analysis_file_path(project_folder, project_name, dataset_accession, ega_analysis_accession):
+	"""
+	Generate the path of an analysis in the project folder
+	:param project_folder: 				The project folder
+	:param project_name: 				The project name where the experiment is
+	:param dataset_accession: 			The dataset EGA accession (EGAD...)
+	:param ega_analysis_accession: 		The analysis EGA accession (EGAR...)
+	:return: The full path of the experiment in a project folder
+	"""
+	return _get_object_file_path(project_folder, project_name, dataset_accession, ega_analysis_accession, 'analysis','analysis.xml')
+
 def get_sample_file_path(project_folder, project_name, dataset_accession, sample_accession):
 	"""
 	Generate the path of a sample in the project folder
@@ -150,6 +173,17 @@ def experiment_exists(project_folder, project_name, dataset_accession, experimen
 	"""
 	return _object_exists(project_folder, project_name, dataset_accession, experiment_accession, 'experiments', 'experiment.xml')
 
+def analysis_exists(project_folder, project_name, dataset_accession, analysis_accession):
+	"""
+	Check if an analysis xml file exists in the project folder
+	:param project_folder: 			The project folder
+	:param project_name: 			The name of the project
+	:param dataset_accession: 		The dataset EGA accession (EGAD...)
+	:param analysis_accession: 		The analysis EGA accession (EGAZ...)
+	:return: True if the xml file exists, False otherwise
+	"""
+	return _object_exists(project_folder, project_name, dataset_accession, experiment_accession, 'analysis', 'analysis.xml')
+
 def sample_exists(project_folder, project_name, dataset_accession, sample_accession):
 	"""
 	Check if a sample xml file exists in the project folder
@@ -184,6 +218,7 @@ def _get_obj_xml(file_path, tag_name,root_name):
 
 	reload(sys)
 	sys.setdefaultencoding('utf-8')
+	print file_path
 	elem =  minidom.parseString(minidom.parse(urllib.urlopen(file_path)).getElementsByTagName(tag_name)[0].toxml()).firstChild
 
 	obj_xml.firstChild.appendChild(elem)
@@ -232,7 +267,7 @@ def _url_exists(url_path):
 	"""
 	return requests.get(url_path).status_code == 200
 
-def quick_generate(project_folder, project_name, output_file,dataset_accession, sample_accession=None, study_accession=None, ega_run_accession=None, experiment_accession=None, include_dataset=True):
+def quick_generate(project_folder, project_name, output_file,dataset_accession, sample_accession=None, study_accession=None, ega_run_accession=None, experiment_accession=None, analysis_accession=None,include_dataset=True):
 	"""
 	Generates the combination of xmls requested
 	:param project_folder: 			The folder containing all the projects
@@ -243,6 +278,7 @@ def quick_generate(project_folder, project_name, output_file,dataset_accession, 
 	:param study_accession: 		The study EGA file accession (EGAS...)
 	:param ega_run_accession: 		The run EGA file accession (EGAR...)
 	:param experiment_accession: 	The experiment EGA file accession (EGAX...)
+	:param analysis_accession:	 	The analysis EGA file accession (EGAZ...)
 	:return: None
 	"""
 	dataset_xml = None
@@ -250,6 +286,7 @@ def quick_generate(project_folder, project_name, output_file,dataset_accession, 
 	experiments_xml = None
 	samples_xml = None
 	study_xml = None
+	analysis_xml = None
 
 	if include_dataset and not dataset_accession=='':
 		dataset_xml = get_dataset(project_folder, project_name, dataset_accession)
@@ -266,7 +303,10 @@ def quick_generate(project_folder, project_name, output_file,dataset_accession, 
 	if not experiment_accession == None and not experiment_accession=='':
 		experiments_xml = get_experiments(project_folder, project_name, dataset_accession, experiment_accession)
 
-	write(output_file, dataset_xml, runs_xml, experiments_xml, samples_xml, study_xml)
+	if not analysis_accession == None and not analysis_accession=='':
+		analysis_xml = get_analyses(project_folder, project_name, dataset_accession, analysis_accession)
+
+	write(output_file, dataset_xml, runs_xml, experiments_xml, analysis_xml,samples_xml, study_xml)
 
 def write(output_file, *xmls):
 	"""
