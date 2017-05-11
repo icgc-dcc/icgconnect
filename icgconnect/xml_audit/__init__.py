@@ -182,7 +182,7 @@ def analysis_exists(project_folder, project_name, dataset_accession, analysis_ac
 	:param analysis_accession: 		The analysis EGA accession (EGAZ...)
 	:return: True if the xml file exists, False otherwise
 	"""
-	return _object_exists(project_folder, project_name, dataset_accession, experiment_accession, 'analysis', 'analysis.xml')
+	return _object_exists(project_folder, project_name, dataset_accession, analysis_accession, 'analysis', 'analysis.xml')
 
 def sample_exists(project_folder, project_name, dataset_accession, sample_accession):
 	"""
