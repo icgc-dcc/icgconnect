@@ -251,19 +251,19 @@ def quick_generate(project_folder, project_name, output_file,dataset_accession, 
 	samples_xml = None
 	study_xml = None
 
-	if include_dataset:
+	if include_dataset and not dataset_accession=='':
 		dataset_xml = get_dataset(project_folder, project_name, dataset_accession)
 
-	if not sample_accession == None:
+	if not sample_accession == None and not sample_accession=='':
 		samples_xml = get_samples(project_folder, project_name, dataset_accession, sample_accession)
 
-	if not study_accession == None:
+	if not study_accession == None and not study_accession=='':
 		study_xml = get_study(project_folder, project_name, dataset_accession, study_accession)
 
-	if not ega_run_accession == None:
+	if not ega_run_accession == None and not ega_run_accession=='':
 		runs_xml = get_runs(project_folder, project_name, dataset_accession, ega_run_accession)
 
-	if not experiment_accession == None:
+	if not experiment_accession == None and not experiment_accession=='':
 		experiments_xml = get_experiments(project_folder, project_name, dataset_accession, experiment_accession)
 
 	write(output_file, dataset_xml, runs_xml, experiments_xml, samples_xml, study_xml)
