@@ -169,7 +169,10 @@ def upload(manifest_file, icgc_storage_client):
             manifest_file (str):    The local path of a manifest file
     """
     #_validate_manifest_file(manifest_file)
-    subprocess.call([icgc_storage_client,'--profile','collab','upload','--manifest',manifest_file])
+    try:
+        subprocess.check_output([icgc_storage_client,'--profile','collab','upload','--manifest',manifest_file])
+    except subprocess.CalledProcessError as err:
+        raise Exception("Upload to collab failed: "+str(err))
 
 def _validate_manifest_file(manifest_file):
     """ Validates if the manifest file for collaboratory upload has the required format
