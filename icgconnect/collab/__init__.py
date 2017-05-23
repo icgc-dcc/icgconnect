@@ -162,7 +162,7 @@ def filename_get_post(gnos_id, id_service_token, filename, project_code):
         filename_post(gnos_id, id_service_token, filename, project_code)
     return filename_get(gnos_id, filename)
 
-def upload(manifest_file, icgc_storage_client):
+def upload(manifest_file, icgc_storage_client, force):
     """ Upload files listed in a manifest file to Collaboratory
 
         Args:
@@ -170,7 +170,10 @@ def upload(manifest_file, icgc_storage_client):
     """
     #_validate_manifest_file(manifest_file)
     try:
-        subprocess.check_output([icgc_storage_client,'--profile','collab','upload','--manifest',manifest_file])
+        if force == True:
+            subprocess.check_output([icgc_storage_client,'--profile','collab','upload','--manifest',manifest_file,'--force'])
+        else:
+            subprocess.check_output([icgc_storage_client,'--profile','collab','upload','--manifest',manifest_file])
     except subprocess.CalledProcessError as err:
         raise Exception("Upload to collab failed: "+str(err))
 
@@ -332,11 +335,11 @@ def add_to_manifest_file(manifest_file, object_id, filename, md5):
     with open(manifest_file, "a") as f:
         f.write(object_id+"\t"+filename+"\t"+md5+"\n")
 
-def quick_upload(gnos_id, files, icgc_storage_client):
+def quick_upload(gnos_id, files, icgc_storage_client, force=True):
     manifest_file = gnos_id+".txt"
     generate_manifest_file(manifest_file, files)
     validate_manifest_file(gnos_id, manifest_file)
-    upload(manifest_file, icgc_storage_client)
+    upload(manifest_file, icgc_storage_client, force)
     delete_manifest_file(manifest_file, True)
 
 
