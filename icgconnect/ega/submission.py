@@ -114,6 +114,26 @@ def datasets_get(session_token, id_type, id, submission_id=None):
 	"""
 	return _objects_get(session_token,'datasets',id_type,id, submission_id=None)
 
+def datasets_post(session_token, submission_id, alias, dataset_type_ids=[], policy_id=None, runs_references = None, analysis_references=[],title=None, dataset_links=[], attributes=[]):
+	data = {}
+	data['alias'] = alias
+	data['datasetTypeIds'] = dataset_type_ids
+	data['policyId'] = policy_id
+	data['runsReferences'] = runs_references
+	data['analysisReferences'] = analysis_references
+	data['title'] = title
+	data['datasetLinks'] = []
+	data['attributes'] = []
+
+	for link in dataset_links:
+		data['datasetLinks'].append({'tag':link['label'], 'url':link['url']})
+
+	for attribute in attributes:
+		data['attributes'].append({'tag':attribute['tag'],'value':attribute['value']})
+
+	return _objects_post(session_token, 'datasets',submission_id,data)
+
+
 def experiments_index(session_token, status=None):
 	""" Index all experiments
 
@@ -139,6 +159,29 @@ def experiments_get(session_token, id_type, id, submission_id=None):
 			dict:	The corresponding experiment
 	"""
 	return _objects_get(session_token,'experiments',id_type,id, submission_id=None)
+
+def experiments_post(session_token, submission_id, alias, title=None, instrument_model_id=None,
+					 library_source_id=None, library_selection_id=None, library_strategy_id=None,
+					 design_description=None, library_name=None, library_construction_protocol=None,
+					 library_layout_id=None,paired_nominal_length=0, paired_nominal_sdev=0, sample_id=None, study_id=None):
+
+	data = {}
+	data['alias'] = alias
+	data['title'] = title
+	data['instrumentModelId'] = instrument_model_id
+	data['librarySourceId'] = library_source_id
+	data['librarySelectionId'] = library_selection_id
+	data['libraryStrategyId'] = library_strategy_id
+	data['designDescription'] = design_description
+	data['libraryName'] = library_name
+	data['libraryConstructionProtocol'] = library_construction_protocol
+	data['libraryLayoutId'] = library_layout_id
+	data['pairedNominalLength'] = paired_nominal_length
+	data['pairedNominalSdev'] = paired_nominal_sdev
+	data['sampleId'] = sample_id
+	data['studyId'] = study_id
+
+	return  _objects_post(session_token,'experiments',submission_id,data)
 
 def analyses_index(session_token, status=None):
 	""" Index all analyses
@@ -192,6 +235,14 @@ def dacs_get(session_token, id_type, id, submission_id=None):
 	"""
 	return _objects_get(session_token,'dacs',id_type,id, submission_id=None)
 
+def dacs_post(session_token, submission_id, alias, title=None, contacts=[]):
+	data = {}
+	data['alias'] = alias
+	data['title'] = title
+	data['contacts'] = contacts
+
+	return  _objects_post(session_token,'dacs',submission_id, data)
+
 def policies_index(session_token, status=None):
 	""" Index all policies
 
@@ -217,6 +268,19 @@ def policies_get(session_token, id_type, id, submission_id=None):
 			dict:	The corresponding policy
 	"""
 	return _objects_get(session_token,'policies',id_type,id, submission_id=None)
+
+def policies_post(session_token, alias, dac_id, title, policy_text, _url):
+	data = {}
+	data['alias'] = alias
+	data['dacId'] = dac_id
+	data['title'] = title
+	data['policyText'] = policy_text
+	data['url'] = _url
+	data = json.dumps(data)
+	return _objects_post(session_token, 'policies', None)
+	return _api_access_endpoint(api_access_url + 'policies')
+	requests.post(_api_access_endpoint(api_access_url + 'policies'), headers=_session_headers(session_token))
+
 
 def runs_index(session_token, status=None):
 	""" Index all runs
@@ -271,6 +335,26 @@ def submissions_get(session_token, id_type, id, submission_id=None):
 			dict:	The corresponding submission
 	"""
 	return _objects_get(session_token,'submissions',id_type,id, submission_id=None)
+
+def submissions_post(session_token, title=None, description=None, analysis_ids=None, dac_ids=None, dataset_ids=None, experiment_ids=None, policy_ids=None, run_ids=None, sample_ids=None, study_ids=None):
+	data = {}
+	data['title'] = title
+	data['description'] = description
+
+	data['submissionSubset'] = {}
+	data['submissionSubset']['analysisIds'] = analysis_ids
+	data['submissionSubset']['dacIds'] = dac_ids
+	data['submissionSubset']['datasetIds'] = dataset_ids
+	data['submissionSubset']['experimentIds'] = experiment_ids
+	data['submissionSubset']['policyIds'] = policy_ids
+	data['submissionSubset']['runIds'] = run_ids
+	data['submissionSubset']['sampleIds'] = sample_ids
+	if not study_ids == None:
+		data['submissionSubset']['studtyIds'] = study_ids
+
+	return _objects_post(session_token, None, None, data)
+
+	return api_access_url+"/submissions"
 
 def enum_analysis_file_types():
 	""" Enumeration of analysis file types
@@ -456,6 +540,26 @@ def _objects_get(session_token,object_type,id_type,id, submission_id=None):
 	_validate_session_token(session_token)
 	validate_id_type(id_type)
 	return _result_from_response(requests.get(_api_access_endpoint('/'+object_type+'/'+id+'?idtype='+id_type), headers=_session_headers(session_token)))[0]['json']
+
+def _objects_post(session_token,object_type,submission_id, json_data):
+	""" Save a specific object - Generic
+
+		Args:
+			session_token:	A valid session token
+			object_type:	The type of the object to retrieve
+			submission_id:	A submission id for filtering
+
+		Returns:
+			dict:	The requested object
+	"""
+	_validate_session_token(session_token)
+
+	url_string = '/submissions'
+
+	if not object_type == None:
+		url_string = url_string + "/" + submission_id + "/" + object_type
+
+	return _result_from_response(requests.post(_api_access_endpoint(url_string), json=json_data, headers=_session_headers(session_token)))[0]
 
 def _session_headers(session_token):
 	""" Generate the session header with the session token
