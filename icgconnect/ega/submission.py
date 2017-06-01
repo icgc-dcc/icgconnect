@@ -62,6 +62,23 @@ def studies_get(session_token,id_type,id, submission_id=None):
 	"""
 	return _objects_get(session_token,'studies',id_type,id, submission_id)
 
+def studies_post(session_token, submission_id, alias=None, study_type_id=None, short_name=None, title=None, study_abastract=None, own_term=None,
+				 pub_med_ids=[],custom_tags=[]):
+	data = {}
+	data['alias'] = alias
+	data['studyTypeId'] = study_type_id
+	data['shortName'] = short_name
+	data['title'] = title
+	data['studyAbstract'] = study_abastract
+	data['ownTerm'] = own_term
+	data['pubMedIds'] = pub_med_ids
+	data['customTags'] = []
+
+	for tag in custom_tags:
+		data['customTags'].append({'tag':tag['tag'], 'value':tag['value']})
+
+	return _objects_post(session_token, 'studies',submission_id,data)
+
 def samples_index(session_token, status=None):
 	""" Index all samples
 
@@ -87,6 +104,31 @@ def samples_get(session_token, id_type, id, submission_id=None):
 			dict:	The corresponding sample
 	"""
 	return _objects_get(session_token,'samples',id_type,id, submission_id)
+
+def samples_post(session_token, submission_id,alias=None, title=None, description=None, case_or_control_id=None,
+				 gender_id=None, organism_part=None, cell_line=None, region=None, phenotype=None, subject_id=None,
+				 anonymized_name=None, bio_sample_id=None, sample_age=None, sample_detail=None, attributes=[]):
+	data = {}
+	data['alias'] = alias
+	data['title'] = title
+	data['description'] = description
+	data['caseOrControlId'] = case_or_control_id
+	data['genderId'] = gender_id
+	data['organismPart'] = organism_part
+	data['cellLine'] = cell_line
+	data['region'] = region
+	data['phenotype'] = phenotype
+	data['subjectId'] = subject_id
+	data['anonymizedName'] = anonymized_name
+	data['bioSampleId'] = bio_sample_id
+	data['sampleAge'] = sample_age
+	data['sampleDetail'] = sample_detail
+	data['attributes'] = []
+
+	for attribute in attributes:
+		data['attributes'].append({'tag':attribute['tag'],'value':attribute['value']})
+
+	return _objects_post(session_token,'samples',submission_id,data)
 
 def datasets_index(session_token, status=None):
 	""" Index all datasets
@@ -209,6 +251,41 @@ def analyses_get(session_token, id_type, id, submission_id=None):
 	"""
 	return _objects_get(session_token,'analyses',id_type,id, submission_id=None)
 
+def analyses_post(session_token, submission_id, alias=None, title=None, description=None, study_id=None, sample_references=[],
+				  analysis_center=None, analysis_date=None, analysis_type_id=None, files=[],
+				  attributes=[], genome_id=None, chromosome_references=[],experiment_type_id=[],platform=None):
+	data = {}
+	data['alias'] = alias
+	data['title'] = title
+	data['description'] = description
+	data['studyId'] = study_id
+	data['analysisCenter'] = analysis_center
+	data['analysisDate'] = analysis_date
+	data['analysisTypeId'] = analysis_type_id
+	data['genomeId'] = genome_id
+	data['experimentTypeId'] = experiment_type_id
+	data['platform'] = platform
+
+	data['sampleReferences'] = []
+	data['files'] = []
+	data['attributes'] = []
+	data['chromosomeReferences'] = []
+
+	for reference in sample_references:
+		data['sampleReferences'].append({'value':reference['value'],'label':reference['label']})
+
+	for _file in files:
+		data['files'].append({'fileId':_file['file_id'],'fileName':_file['file_name'],'checksum':_file['checksum'],
+		'unencryptedChecksum':_file['unencrypted_checksum'],'fileTypeId':_file['file_type_id']})
+
+	for attribute in attributes:
+		data['attribtues'].append({'tag':attribute['tag'], 'value':attribute['value'],'unit':attribute['unit']})
+
+	for reference in chromosome_references:
+		data['chromosomeReferences'].append({'value':reference['value'],'label':reference['label']})
+
+	return _objects_post(session_token,'analyses',submission_id,data)
+
 def dacs_index(session_token, status=None):
 	""" Index all dacs
 
@@ -278,8 +355,6 @@ def policies_post(session_token, alias, dac_id, title, policy_text, _url):
 	data['url'] = _url
 	data = json.dumps(data)
 	return _objects_post(session_token, 'policies', None)
-	return _api_access_endpoint(api_access_url + 'policies')
-	requests.post(_api_access_endpoint(api_access_url + 'policies'), headers=_session_headers(session_token))
 
 
 def runs_index(session_token, status=None):
@@ -307,6 +382,22 @@ def runs_get(session_token, id_type, id, submission_id=None):
 			dict:	The corresponding run
 	"""
 	return _objects_get(session_token,'runs',id_type,id, submission_id=None)
+
+def runs_post(session_token, submission_id,alias=None, sample_id=None, run_file_type_id=None, experiment_id=None, files=[]):
+	data = {}
+	data['alias'] = alias
+	data['sampleId'] = sample_id
+	data['runFileTypeId'] = run_file_type_id
+	data['experimentId'] = experiment_id
+	data['files'] = []
+	for _file in files:
+		data['files'].append({'fileId':_file['file_id'],
+							  'fileName':_file['file_name'],
+							  'checksum':_file['checksum'],
+							  'unencryptedChecksum':_file['unencrypted_checksum'],
+							  'checksumMethod':_file['checksum_method']})
+
+	return _objects_post(session_token, 'runs',submission_id,data)
 
 def submissions_index(session_token, status=None):
 	""" Index all submissions
@@ -632,6 +723,7 @@ def _validate_response(json_response):
 		Raises:
 			ValueError:	An invalid json response
 	"""
+	print json_response['header']
 	if json_response['header']['code'] != "200":
 		raise ValueError(json_response['header']['userMessage'])
 
