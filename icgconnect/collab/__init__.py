@@ -43,15 +43,16 @@ def entities_post(id_service_token, gnos_id, filename, project_code):
             ValueError: The entity already exists in the record
             ValueError: The ICGC token is invalid
     """
-    try:
-        entities_get(gnos_id)
-        raise ValueError("Entity already exists in collaboratory: "+gnos_id)
-    except ValueError, err:
-        pass
+    #try:
+    #    entities_get(gnos_id)
+    #    raise ValueError("Entity already exists in collaboratory: "+gnos_id)
+    #except ValueError, err:
+    #    pass
 
     headers = {'Content-Type': 'application/json','Authorization': 'Bearer ' + id_service_token}
     body = {"gnosId": gnos_id,"fileName": filename,"projectCode": project_code,"access": "controlled"}
     r = requests.post(_COLLAB_URL+'/entities', data=json.dumps(body), headers=headers)
+    print r.text
 
     if r.status_code == 401:
         raise ValueError("ICGC server error response: "+json.loads(r.text).get('error'))
@@ -342,5 +343,8 @@ def quick_upload(gnos_id, files, icgc_storage_client, force=True):
     upload(manifest_file, icgc_storage_client, force)
     delete_manifest_file(manifest_file, True)
 
-
-    
+def download(object_id, icgc_storage_client, output_dir,force=True):
+    if force:
+        subprocess.call([icgc_storage_client, '--profile','collab','download','--object-id',object_id,'--index=false','--output-dir',output_dir,'--force'])
+    else:
+        subprocess.call([icgc_storage_client, '--profile','collab','download','--object-id',object_id,'--index=false','--output-dir',output_dir])
