@@ -1,7 +1,7 @@
 import hashlib
 import os
 from shutil import copyfile
-#import pysam
+import pysam
 
 def get_file_md5(fname):
 	if not os.path.isfile(fname):
