@@ -7,7 +7,7 @@ setup(name='icgconnect',
       author='Brice Aminou',
       author_email='brice.aminou@oicr.on.ca',
       license='MIT',
-      packages=['icgconnect','icgconnect.collab','icgconnect.ega','icgconnect.icgc','icgconnect.utils','icgconnect.xml_audit'],
+      packages=['icgconnect','icgconnect.collab','icgconnect.ega','icgconnect.icgc','icgconnect.utils','icgconnect.xml_audit','icgconnect.aws'],
       install_requires=[
             'requests',
             'pysam'
