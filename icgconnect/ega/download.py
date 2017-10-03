@@ -1,3 +1,9 @@
+"""
+Wrapper functions for EGA download API
+
+This package contains many wrapper functions for the EGA download API.
+Have a look at the submission wrapper if you need functions for EGA submission API
+"""
 
 import requests
 import re
@@ -50,13 +56,11 @@ def logout(session_token):
 	return _result_from_response(requests.get(_api_access_endpoint("/users/logout",session_token), verify=False))[0]
 
 def datasets_index(session_token):
-	""" List the dataset ids
-
-		Args:
-			session_token: A valid session token
-
-		Return:
-			dict: List of dataset ids
+	"""
+	List the dataset ids of the connected user
+	
+	:param session_token: 	A valid user session token
+	:return: 		An array of EGADids submitted by the user
 	"""
 	_validate_session_token(session_token)
 	return _result_from_response(requests.get(_api_access_endpoint("/datasets",session_token), verify=False))
@@ -75,14 +79,12 @@ def files_index(session_token, dataset):
 	return _result_from_response(requests.get(_api_access_endpoint("/datasets/"+dataset+"/files",session_token), verify=False))
 
 def files_get(session_token, file_id):
-	""" Informations about one file
-
-		Args:
-			session_token: A valid session token
-			file_id: A file id to access
-
-		Return:
-			dict: Informations about the requested file
+	"""
+	Retrieve the informations about one file
+	
+	:param session_token:	A valid user session token
+	:param file_id: 	An EGAFID to access
+	:return dict: 		Info about the requested file
 	"""
 	_validate_session_token(session_token)
 	return _result_from_response(requests.get(_api_access_endpoint("/files/"+file_id,session_token), verify=False))
@@ -227,6 +229,14 @@ def _result_from_response(raw_response):
 	return r['response']['result']
 
 def download_request(session_token, request_label, type,output_file):
+	"""
+	Download a request successfully previously created by the connected user
+	
+	:param session_token: 	A valid user session token
+	:param request_label: 	The request's label to download
+	:param type: 			
+	:param output_file: 	The path of the output file
+	"""
 	if not type.lower() in ['datasets','files']:
 		raise ValueError("Request can be created only on files or datasets")
 
@@ -239,13 +249,13 @@ def download_request(session_token, request_label, type,output_file):
 					f.write(chunk)
 
 def decrypt_encrypted_file(email,password,_file,decryption_key):
-	""" Decrypt an ega encrypted file
-
-		Args:
-			email (str): 		Email of the user to login
-			password (str): 	Password of the user
-			_file:				The path of the file to be decrypted
-			decryption_key:		A valid key to decrypt the file
+	"""
+	Decrypt an ecrypted file from EGA
+	
+	:param email: 			User's login e-mail
+	:param password: 		User's login password
+	:param _file: 			Path of the file to be decrypted
+	:param decryption_key: 		The decryption key
 	"""
 	# Email must be a valid email
 	if not re.match("[^@]+@[^@]+\.[^@]+", email):
