@@ -17,3 +17,16 @@ ICGConnect contains many helpful functions to communicate with different servers
 * EGA - https://ega-archive.org/submission/programmatic-submissions
 * Collaboratory - http://docs.icgc.org/cloud/guide/
 * ICGC - http://docs.icgc.org/portal/api/
+
+# Help
+You can access the list of functions and definitions using pydoc - https://docs.python.org/2/library/pydoc.html
+## EGA
+Wrapper functions for EGA submission and downloand API
+### EGA Submission
+```bash
+pydoc icgconnect.ega.submission
+```
+### EGA Download
+```bash
+pydoc icgconnect.ega.download
+```
