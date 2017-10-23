@@ -30,3 +30,15 @@ pydoc icgconnect.ega.submission
 ```bash
 pydoc icgconnect.ega.download
 ```
+### Collaboratory
+```bash
+pydoc icgconnect.ega.collab
+```
+### Amazon S3 (AWS)
+```bash
+pydoc icgconnect.aws
+```
+### ICGC
+```bash
+pydoc icgconnect.icgc
+```
