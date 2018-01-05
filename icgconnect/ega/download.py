@@ -86,12 +86,14 @@ def files_get(session_token, file_id):
 	"""
 	Retrieve the informations about one file
 	
+	Raise ValueError If the user is not authorized to access the dataset
+	
 	:param session_token:	A valid user session token
 	:param file_id: 	An EGAFID
 	:return dict: 		Info about the requested file
 	"""
 	_validate_session_token(session_token)
-	return _result_from_response(requests.get(_api_access_endpoint("/files/"+file_id,session_token), verify=False))
+	return _result_from_response(requests.get(_api_access_endpoint("/files/"+file_id,session_token), verify=False))[0]
 
 def requests_index(session_token):
 	"""
@@ -129,33 +131,29 @@ def requests_get(session_token, request_label):
 	return _result_from_response(requests.get(_api_access_endpoint("/requests/"+request_label,session_token), verify=False))[0]
 
 def requests_delete(session_token, request_label):
-	""" Delete an existing request
-
-		Args:
-			session_token: A valid session token
-
-		Return:
-			dict: The deletion status
+	"""
+	Delete an existing request
+	
+	:param session_token: A valid user session token
+	:param request_label: The request's created label
+	:return string: 'OK' if the request was deleted 
 	"""
 	_validate_session_token(session_token)
-	return _result_from_response(requests.get(_api_access_endpoint("/requests/delete/"+request_label, session_token), verify=False))
+	return _result_from_response(requests.get(_api_access_endpoint("/requests/delete/"+request_label, session_token), verify=False))[0]
 
 def requests_create(session_token, object_id, type, encryption_key, request_label):
-	"""  Create a new request 
-
-		Args:
-			session_token: A valid session token
-			object_id: The id of the object to download
-			type: Type of data to download
-			encryption_key: Encrypt key to use for encryption
-			request_lable: A label name for the request
-
-		Return:
-			dict: The informations about the created request
-
-		Raises:
-			ValueError: The type has to be either files or datasets
-			ValueError: An error from the ega server
+	"""
+	Create a new file or dataset request
+	
+	raise ValueError: The type has to be either files or datasets
+	ValueError: An error from the ega server
+	
+	:param session_token: A valid user session token
+	:param object_id: EGAFID or EGADID to download
+	:param type: files or datasets
+	:param encryption_key: An encryption key
+	:param request_label: A label for the request
+	:return: The created request
 	"""
 	_validate_session_token(session_token)
 
@@ -163,11 +161,9 @@ def requests_create(session_token, object_id, type, encryption_key, request_labe
 		raise ValueError("Request can be created only on files or datasets")
 
 	downloadrequest = {'downloadrequest':'{"rekey":'+encryption_key+',"downloadType":"STREAM","descriptor":'+request_label+'}'}
-	response = requests.post("https://ega.ebi.ac.uk/ega/rest/access/v2/requests/new/"+type+"/"+object_id+"?session="+session_token,data=downloadrequest,headers={'Accept':'application/json'}, verify=False)
-	if response.status_code != 200:
-		raise ValueError(json.loads(response)['header']['userMessage'])
+	requests.post("https://ega.ebi.ac.uk/ega/rest/access/v2/requests/new/"+type+"/"+object_id+"?session="+session_token,data=downloadrequest,headers={'Accept':'application/json'}, verify=False)
 
-	return requests_get(session_token,request_label)[0]
+	return requests_get(session_token,request_label)
 
 def tickets_get(session_token, ticket_id):
 	""" Informations about a ticket

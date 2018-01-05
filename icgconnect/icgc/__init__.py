@@ -7,6 +7,8 @@ import subprocess
 ICGC_ID_SERVICE_URL_TEST = "http://hetl2-dcc.res.oicr.on.ca:9000" # dry run uses this
 ICGC_ID_SERVICE_URL_PROD = "https://id.icgc.org" # submit uses this
 
+ICGC_API_BASEURL = "https://dcc.icgc.org/api"
+
 ICGC_ID_SERVICE_ENDPOINTS = {
     "id": {
         "donor": {
@@ -23,6 +25,45 @@ ICGC_ID_SERVICE_ENDPOINTS = {
         }
     }
 }
+
+def index_donors():
+    return requests.get(ICGC_API_BASEURL+'/v1/donors').text
+
+def donors_pql():
+    return requests.get(ICGC_API_BASEURL+'/v1/donors/pql').text
+
+def get_donor(donor_id):
+    return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id).text
+
+def get_donor_genes(donor_id):
+    return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id+'/genes').text
+
+def get_donor_genes_count(donor_id):
+    return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id+'/genes/count').text
+
+def get_donor_genes_counts(donor_id):
+    return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id+'/genes/counts').text
+
+def get_donor_mutations_count_by_gene(donor_id, gene_id):
+    return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id+'/genes/'+gene_id+'/mutations/count').text
+
+def get_dono_mutations_counts_by_gene(donor_id, gene_id):
+    return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id+'/genes/'+gene_id+'/mutations/counts').text
+
+def get_donor_mutations(donor_id):
+    return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id+'/mutations').text
+
+def get_donor_mutations_count(donor_id):
+    return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id+'/mutations/count').text
+
+def get_donor_mutations_counts(donor_id):
+    return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id+'/mutations/counts').text
+
+def get_donor_genes_count_by_mutation(donor_id, mutation_id):
+    return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id+'/mutations/'+mutation_id+'/genes/count').text
+
+def get_donor_genes_counts_by_mutation(donor_id, mutation_id):
+    return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id+'/mutations/'+mutation_id+'/genes/counts').text
 
 
 def id_service(icgc_token, type_, project_code, submitter_id, create=True, is_test=False):

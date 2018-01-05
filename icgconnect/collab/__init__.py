@@ -48,7 +48,6 @@ def entities_post(id_service_token, gnos_id, filename, project_code):
     #    raise ValueError("Entity already exists in collaboratory: "+gnos_id)
     #except ValueError, err:
     #    pass
-
     headers = {'Content-Type': 'application/json','Authorization': 'Bearer ' + id_service_token}
     body = {"gnosId": gnos_id,"fileName": filename,"projectCode": project_code,"access": "controlled"}
     r = requests.post(_COLLAB_URL+'/entities', data=json.dumps(body), headers=headers)
