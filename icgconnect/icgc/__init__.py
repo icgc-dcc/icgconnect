@@ -3,6 +3,7 @@ import json
 import re
 import os
 import subprocess
+import song
 
 ICGC_ID_SERVICE_URL_TEST = "http://hetl2-dcc.res.oicr.on.ca:9000" # dry run uses this
 ICGC_ID_SERVICE_URL_PROD = "https://id.icgc.org" # submit uses this
