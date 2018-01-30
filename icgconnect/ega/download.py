@@ -35,7 +35,7 @@ def login(email, password):
 
 	try:
 		return _result_from_response(requests.get(_api_access_endpoint("/users/"+email+"?pass="+password, None), verify=False))[1]
-	except ValueError, err:
+	except ValueError as err:
 		raise ValueError("EGA response: "+str(err)+" - Verify email and password")
 
 def logout(session_token):

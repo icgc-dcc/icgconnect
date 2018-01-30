@@ -218,7 +218,7 @@ def _get_obj_xml(file_path, tag_name,root_name):
 
 	reload(sys)
 	sys.setdefaultencoding('utf-8')
-	print file_path
+	print(file_path)
 	elem =  minidom.parseString(minidom.parse(urllib.urlopen(file_path)).getElementsByTagName(tag_name)[0].toxml()).firstChild
 
 	obj_xml.firstChild.appendChild(elem)

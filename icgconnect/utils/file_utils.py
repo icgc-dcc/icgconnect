@@ -17,6 +17,17 @@ def get_file_size(fname):
 		raise ValueError("The file does not exist: "+fname)
 	return os.path.getsize(fname)
 
+def get_file_type(fname):
+	if not os.path.isfile(fname):
+		raise ValueError("The file does not exist: " + fname)
+
+	for type in ['bam','xml','bai','fastq']:
+		if fname.lower().endswith(type):
+			return type
+
+	raise ValueError("The file does not have a recognized extension: "+fname)
+
+
 def delete_file(filename):
 	""" Delete a file in the local system
 

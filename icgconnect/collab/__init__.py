@@ -51,7 +51,7 @@ def entities_post(id_service_token, gnos_id, filename, project_code):
     headers = {'Content-Type': 'application/json','Authorization': 'Bearer ' + id_service_token}
     body = {"gnosId": gnos_id,"fileName": filename,"projectCode": project_code,"access": "controlled"}
     r = requests.post(_COLLAB_URL+'/entities', data=json.dumps(body), headers=headers)
-    print r.text
+    print(r.text)
 
     if r.status_code == 401:
         raise ValueError("ICGC server error response: "+json.loads(r.text).get('error'))
@@ -77,7 +77,7 @@ def entities_get_post(gnos_id, id_service_token, filename, project_code):
 
     try:
         return entities_get(gnos_id)
-    except ValueError, err:
+    except ValueError as err:
         raise ValueError("Entity cannot be created. Please verify the provided information. GNOS id: "+gnos_id+", service token: "+id_service_token+", filename: "+filename+", project code: "+project_code)
 
 def entities_exists(gnos_id):
@@ -92,7 +92,7 @@ def filename_exists(gnos_id, filename):
     try:
         filename_get(gnos_id, filename)
         return True
-    except ValueError, err:
+    except ValueError:
         return False
 
 def filename_get_id(gnos_id, filename):
@@ -146,7 +146,7 @@ def filename_post(gnos_id, id_service_token, filename, project_code):
     try:
         _file = filename_get_id(gnos_id, filename)
         return _file
-    except ValueError, err:
+    except ValueError:
         pass
 
     headers = {'Content-Type': 'application/json','Authorization': 'Bearer ' + id_service_token}
@@ -268,7 +268,7 @@ def validate_manifest_file(gnos_id, manifest_file):
         for row in reader:
             try:
                 _validate_file_to_upload(gnos_id, row['file_name'],row['md5'],row['object_id'])
-            except ValueError, err:
+            except ValueError as err:
                 raise ValueError("Manifest file validation failed. Reason: "+str(err))
     return True
 

@@ -1,2 +1,2 @@
-import download
-import submission
+from .download import *
+from .submission import *

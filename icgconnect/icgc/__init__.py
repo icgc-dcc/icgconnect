@@ -33,7 +33,7 @@ def donors_pql():
     return requests.get(ICGC_API_BASEURL+'/v1/donors/pql').text
 
 def get_donor(donor_id):
-    return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id).text
+    return json.loads(requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id).text)
 
 def get_donor_genes(donor_id):
     return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id+'/genes').text
@@ -47,7 +47,7 @@ def get_donor_genes_counts(donor_id):
 def get_donor_mutations_count_by_gene(donor_id, gene_id):
     return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id+'/genes/'+gene_id+'/mutations/count').text
 
-def get_dono_mutations_counts_by_gene(donor_id, gene_id):
+def get_donor_mutations_counts_by_gene(donor_id, gene_id):
     return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id+'/genes/'+gene_id+'/mutations/counts').text
 
 def get_donor_mutations(donor_id):
@@ -65,6 +65,51 @@ def get_donor_genes_count_by_mutation(donor_id, mutation_id):
 def get_donor_genes_counts_by_mutation(donor_id, mutation_id):
     return requests.get(ICGC_API_BASEURL+'/v1/donors/'+donor_id+'/mutations/'+mutation_id+'/genes/counts').text
 
+def get_donor_id_from_submitted_donor_id(project_id, submitted_donor_id):
+    for line in get_samples_from_project(project_id).split('\n'):
+        if line.split('\t')[5] == submitted_donor_id:
+            return line.split('\t')[4]
+
+def get_gender_from_donor_id(donor_id):
+    return get_donor(donor_id).get('gender')
+
+def get_submitter_donor_id_from_donor_id(donor_id):
+    return get_donor(donor_id).get('submittedDonorId')
+
+def get_samples_from_project(project_id):
+    return requests.get(ICGC_API_BASEURL+'/v1/projects/'+project_id+'/samples').text
+
+def get_project_id_from_donor_id(donor_id):
+    return get_donor(donor_id).get('projectId')
+
+def get_submitted_sample_id_from_donor_id(donor_id):
+    return _get_donor_dict(donor_id).get('submitted_sample_id')
+
+def get_submitted_specimen_id_from_donor_id(donor_id):
+    return _get_donor_dict(donor_id).get('submitted_specimen_id')
+
+def get_specimen_type_from_donor_id(donor_id):
+    return _get_donor_dict(donor_id).get('specimen_type')
+
+def get_specimen_class_from_donor_id(donor_id):
+    specimen_type = get_specimen_type_from_donor_id(donor_id)
+    if "normal" in specimen_type.lower(): return "Normal"
+    if "tumour" in specimen_type.lower(): return "Tumour"
+    raise ValueError("The specimen class could not be determined")
+
+def get_sample_submitter_id_from_donor_id(donor_id):
+    return _get_donor_dict(donor_id).get('icgc_sample_id')
+
+def get_library_strategy_from_donor_id(donor_id):
+    return _get_donor_dict(donor_id).get('sequencing_strategy')
+
+def _get_donor_dict(donor_id):
+    project_id = get_project_id_from_donor_id(donor_id)
+    _keys = get_samples_from_project(project_id).split('\n')[0].split('\t')
+    for line in get_samples_from_project(project_id).split('\n'):
+        if line.split('\t')[4] == donor_id:
+            _line = line.split('\t')
+            return dict(zip(_keys,_line))
 
 def id_service(icgc_token, type_, project_code, submitter_id, create=True, is_test=False):
     """
