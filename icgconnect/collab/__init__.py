@@ -343,12 +343,13 @@ def quick_upload(gnos_id, files, icgc_storage_client, force=True):
     delete_manifest_file(manifest_file, True)
 
 def download(object_id, icgc_storage_client, output_dir,force=True, skip_validation=False):
-    args = ""
-    if force:
-        args = args + " --force"
+    args = []
 
     if skip_validation:
-        args = args + " --validate=false"
+        args.append("--validate=false")
+
+    if force:
+        args.append("--force")
 
     subprocess.call([icgc_storage_client, '--profile', 'collab', 'download', '--object-id', object_id, '--index=false',
-                     '--output-dir', output_dir, args])
+                     '--output-dir', output_dir]+args)
